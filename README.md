@@ -1,4 +1,4 @@
-# TTRPG web apps
+# TTRPG companion
 
 This repo holds a web app written in ReactJS + Vite to use as companion for some TTRPGs.
 

@@ -1,24 +1,8 @@
 import { useState } from 'react';
 import {
-  Skull,
-  ArrowLeft,
-  Archive,
-  Dices,
-  Save,
-  Edit3,
-  User,
-  Heart,
-  Sword,
-  RotateCcw,
-  MoveRight,
-  Download,
-  Calculator,
-  Infinity,
-  Play,
-  Scroll,
-  Book,
-  ShieldAlert,
-  Feather,
+  Skull, ArrowLeft, Archive, Dices, Save, Edit3,
+  User, Heart, Sword, RotateCcw, MoveRight, Download,
+  Calculator, Infinity, Play, Scroll, Book, ShieldAlert, Feather,
 } from 'lucide-react';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
