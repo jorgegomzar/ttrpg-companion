@@ -3,11 +3,10 @@ import { Skull, ArrowLeft } from 'lucide-react';
 import Button from '../../../components/Button';
 import Card from '../../../components/Card';
 
-const SetupView = ({ onStart, onExit }) => {
+const SetupView = ({ onStart }) => {
   const [count, setCount] = useState(1);
   return (
     <div className="min-h-screen bg-black text-neutral-400 flex flex-col items-center justify-center p-6 font-serif bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-neutral-900 to-black">
-      <button onClick={onExit} className="absolute top-4 left-4 flex items-center gap-2 text-neutral-500 hover:text-white"><ArrowLeft size={20}/> Volver al Hub</button>
       <div className="max-w-md w-full text-center space-y-8">
         <div className="space-y-2">
           <Skull className="w-16 h-16 mx-auto text-red-900 animate-pulse" />

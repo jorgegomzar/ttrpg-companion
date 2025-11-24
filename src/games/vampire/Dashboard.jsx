@@ -24,8 +24,7 @@ const Dashboard = ({
   setTurnPhase, 
   turnCount, 
   setTurnCount, 
-  onEndGame, 
-  onExit 
+  onEndGame
 }) => {
   const currentPlayer = players[currentPlayerIndex];
   

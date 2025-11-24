@@ -6,7 +6,7 @@ import Card from '../../../components/Card';
 import jsPDF from 'jspdf';
 import JSZip from 'jszip';
 
-const VampireEnded = ({ players, gameLog, onExit }) => {
+const VampireEnded = ({ players, gameLog }) => {
   const [loading, setLoading] = useState(false);
 
   const generateAndDownload = async () => {
@@ -137,7 +137,6 @@ const VampireEnded = ({ players, gameLog, onExit }) => {
           <Button onClick={generateAndDownload} className="w-full py-4 text-lg" disabled={loading} variant="primary">
             {loading ? "Generando..." : "Descargar Archivos (.zip)"} <Download className="w-5 h-5"/>
           </Button>
-          <Button variant="secondary" onClick={onExit}>Volver al Hub</Button>
        </Card>
     </div>
   );

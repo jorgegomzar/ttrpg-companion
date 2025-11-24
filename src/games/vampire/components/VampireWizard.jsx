@@ -12,8 +12,7 @@ const VampireWizard = ({
   setStep, 
   data, 
   setData, 
-  onComplete, 
-  onExit 
+  onComplete
 }) => {
   const updateData = (field, value) => setData({ ...data, [field]: value });
   const steps = [
@@ -147,7 +146,6 @@ const VampireWizard = ({
 
   return (
     <div className="min-h-screen bg-black text-neutral-300 font-serif p-6">
-      <button onClick={onExit} className="absolute top-4 left-4 flex items-center gap-2 text-neutral-500 hover:text-white"><ArrowLeft size={20}/> Volver al Hub</button>
       <div className="max-w-2xl mx-auto">
         <div className="flex justify-between items-center mb-6 border-b border-neutral-800 pb-4">
           <div>

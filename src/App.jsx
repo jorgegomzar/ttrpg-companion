@@ -1,5 +1,7 @@
 import { useState } from 'react';
+import { ArrowLeft } from 'lucide-react';
 import Hub from './pages/Hub';
+import ReturnToHub from './components/ReturnToHub';
 import VampireGame from './games/vampire/VampireGame';
 
 export default function App() {
@@ -13,8 +15,14 @@ export default function App() {
     return <Hub onNavigate={handleNavigate} />;
   }
 
+  const onExit = () => setCurrentApp('hub')
+
   if (currentApp === 'vampire') {
-    return <VampireGame onExit={() => setCurrentApp('hub')} />;
+    return (
+      <ReturnToHub onExit={onExit} >
+        <VampireGame/>
+      </ReturnToHub>
+    )
   }
 
   return null;
