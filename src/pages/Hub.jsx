@@ -26,7 +26,7 @@ const Hub = ({ onNavigate }) => (
           cover={Skull}
         >
           Un juego de rol en solitario (o cooperativo) sobre la pérdida de la memoria y la humanidad a lo largo de siglos de existencia.
-          Para jugar es necesario poseer el <a href="https://www.elrefugioeditorial.com/un-vampiro-de-mil-anos"><b><u>JUEGO ORIGINAL</u></b></a>
+          Para jugar es necesario poseer el <a class="underline decoration-dashed" href="https://www.elrefugioeditorial.com/un-vampiro-de-mil-anos"><b>JUEGO ORIGINAL</b></a>
         </HubCard>
 
         <HubCard
