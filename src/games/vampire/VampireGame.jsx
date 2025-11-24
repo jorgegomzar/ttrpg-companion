@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Skull, ArrowLeft } from 'lucide-react';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
@@ -9,17 +9,21 @@ import VampireEnded from './components/VampireEnded';
 import SetupView from './components/SetupView';
 import { generateId, calculateDiff } from './components/utils';
 
-const VampireGame = ({ onExit }) => {
+const VampireGame = () => {
   const [phase, setPhase] = useState('setup'); // setup, creation, game, ended
   const [players, setPlayers] = useState([]);
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
   const [creationStep, setCreationStep] = useState(0);
-  
+
   // Game Log State
   const [gameLog, setGameLog] = useState([]); // [{ turn: 1, player: "Name", events: [] }]
   const [turnCount, setTurnCount] = useState(1);
   const [turnSnapshot, setTurnSnapshot] = useState(null); // State of current player at start of turn
   const [turnPhase, setTurnPhase] = useState('rolling'); // 'rolling' | 'playing'
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [phase, creationStep, turnPhase]);
 
   // Temporary state for creation
   const [tempChar, setTempChar] = useState({
@@ -94,7 +98,7 @@ const VampireGame = ({ onExit }) => {
 
   // --- Views ---
   if (phase === 'setup') {
-      return <SetupView onStart={startCreation} onExit={onExit}/>;
+      return <SetupView onStart={startCreation}/>
   }
 
   // Creation View
@@ -107,7 +111,6 @@ const VampireGame = ({ onExit }) => {
         data={tempChar} 
         setData={setTempChar} 
         onComplete={savePlayer}
-        onExit={onExit}
      />
   }
 
@@ -127,13 +130,12 @@ const VampireGame = ({ onExit }) => {
         turnPhase={turnPhase} 
         setTurnPhase={setTurnPhase}
         onEndGame={endGame} 
-        onExit={onExit}
      />
   }
 
   // Ended View
   if (phase === 'ended') {
-    return <VampireEnded players={players} gameLog={gameLog} onExit={onExit} />
+    return <VampireEnded players={players} gameLog={gameLog} />
   }
 
   return null;
