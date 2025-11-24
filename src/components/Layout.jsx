@@ -1,5 +1,5 @@
 import { Gamepad2 } from 'lucide-react';
-import  AppLogo from './AppLogo';
+import AppLogo from './AppLogo';
 
 const Layout = ({ children, title = "TTRPG Companion" }) => (
   <div className="min-h-screen bg-neutral-950 text-neutral-200 font-sans selection:bg-indigo-500 selection:text-white">
