@@ -8,6 +8,7 @@ import Dashboard from './Dashboard';
 import VampireEnded from './components/VampireEnded';
 import SetupView from './components/SetupView';
 import { generateId, calculateDiff } from './components/utils';
+import { useGameStorage } from './hooks/useGameStorage';
 
 const VampireGame = () => {
   const [phase, setPhase] = useState('setup'); // setup, creation, game, ended
@@ -20,6 +21,29 @@ const VampireGame = () => {
   const [turnCount, setTurnCount] = useState(1);
   const [turnSnapshot, setTurnSnapshot] = useState(null); // State of current player at start of turn
   const [turnPhase, setTurnPhase] = useState('rolling'); // 'rolling' | 'playing'
+
+  // Game state for persistence
+  const gameState = {
+    phase, players, currentPlayerIndex, creationStep,
+    gameLog, turnCount, turnSnapshot, turnPhase
+  };
+
+  const { loadGame, clearSave } = useGameStorage(gameState);
+
+  // Load saved game on mount
+  useEffect(() => {
+    const saved = loadGame();
+    if (saved) {
+      setPhase(saved.phase);
+      setPlayers(saved.players);
+      setCurrentPlayerIndex(saved.currentPlayerIndex);
+      setCreationStep(saved.creationStep);
+      setGameLog(saved.gameLog);
+      setTurnCount(saved.turnCount);
+      setTurnSnapshot(saved.turnSnapshot);
+      setTurnPhase(saved.turnPhase);
+    }
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -47,12 +71,27 @@ const VampireGame = () => {
   });
   
   const startCreation = (numPlayers) => {
+    clearSave();
     const initialPlayers = Array(parseInt(numPlayers)).fill(null).map(() => null);
     setPlayers(initialPlayers);
     setPhase('creation');
     setCreationStep(0);
     setGameLog([]);
     resetTempChar();
+  };
+
+  const continueGame = () => {
+    const saved = loadGame();
+    if (saved) {
+      setPhase(saved.phase);
+      setPlayers(saved.players);
+      setCurrentPlayerIndex(saved.currentPlayerIndex);
+      setCreationStep(saved.creationStep);
+      setGameLog(saved.gameLog);
+      setTurnCount(saved.turnCount);
+      setTurnSnapshot(saved.turnSnapshot);
+      setTurnPhase(saved.turnPhase);
+    }
   };
 
   const savePlayer = () => {
@@ -98,7 +137,7 @@ const VampireGame = () => {
 
   // --- Views ---
   if (phase === 'setup') {
-      return <SetupView onStart={startCreation}/>
+      return <SetupView onStart={startCreation} onContinue={continueGame} hasSavedGame={!!loadGame()} />
   }
 
   // Creation View
