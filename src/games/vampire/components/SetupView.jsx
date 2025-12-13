@@ -3,7 +3,7 @@ import { Skull, ArrowLeft } from 'lucide-react';
 import Button from '../../../components/Button';
 import Card from '../../../components/Card';
 
-const SetupView = ({ onStart }) => {
+const SetupView = ({ onStart, onContinue, hasSavedGame }) => {
   const [count, setCount] = useState(1);
   return (
     <div className="min-h-screen bg-black text-neutral-400 flex flex-col items-center justify-center p-6 font-serif bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-neutral-900 to-black">
@@ -14,6 +14,11 @@ const SetupView = ({ onStart }) => {
           <p className="text-neutral-500 italic">Edición Multijugador</p>
         </div>
         <Card className="space-y-6">
+          {hasSavedGame && (
+            <Button onClick={onContinue} className="w-full py-4 text-lg bg-red-800 hover:bg-red-700">
+              Continuar Partida
+            </Button>
+          )}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-neutral-300">Número de Jugadores</label>
             <div className="flex items-center justify-center gap-4">
