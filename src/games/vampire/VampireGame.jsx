@@ -122,6 +122,10 @@ const VampireGame = () => {
     setPhase('ended');
   };
 
+  const cancelEndGame = () => {
+    setPhase('game');
+  };
+
   // --- Views ---
   if (phase === 'setup') {
       return <SetupView onStart={startCreation} onContinue={continueGame} lastSave={last_save} />
@@ -161,7 +165,7 @@ const VampireGame = () => {
 
   // Ended View
   if (phase === 'ended') {
-    return <VampireEnded players={players} gameLog={gameLog} />
+    return <VampireEnded players={players} gameLog={gameLog} cancelEndGame={cancelEndGame} />
   }
 
   return null;
