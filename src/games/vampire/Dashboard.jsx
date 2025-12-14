@@ -27,7 +27,7 @@ const Dashboard = ({
   onEndGame
 }) => {
   const currentPlayer = players[currentPlayerIndex];
-  
+
   // Rolling state
   const [manualRoll, setManualRoll] = useState({ d10: '', d6: '' });
   const [activeRoll, setActiveRoll] = useState(null); // { d10, d6, result, targetEvent }
@@ -175,7 +175,7 @@ const Dashboard = ({
     updatePlayer({ ...currentPlayer, memories });
   };
   const createNewMemory = () => {
-    if (currentPlayer.memories.filter(m => !m.isDiary).length >= 5) {
+    if (currentPlayer.memories.filter(m => !m.isDiary && !m.isForgotten).length >= 5) {
       alert("Tienes demasiados recuerdos activos.");
       return;
     }
