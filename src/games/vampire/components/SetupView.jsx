@@ -17,7 +17,7 @@ const SetupView = ({ onStart, onContinue, lastSave }) => {
           {lastSave && (
             <Button onClick={onContinue} className="w-full py-4 text-lg bg-red-800 hover:bg-red-700">
               Continuar Partida
-              ({lastSave.players.length} jugador{lastSave.players.length > 1 ? "es" : ""}, turno {lastSave.gameLog.length})
+              ({lastSave.players.length} jugador{lastSave.players.length > 1 ? "es" : ""}, turno {lastSave.gameLog[lastSave.gameLog.length-1].turn})
             </Button>
           )}
           <div className="space-y-2">

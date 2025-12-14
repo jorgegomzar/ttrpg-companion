@@ -15,6 +15,33 @@ const VampireWizard = ({
   onComplete
 }) => {
   const updateData = (field, value) => setData({ ...data, [field]: value });
+
+  const validateStep = (stepIndex) => {
+    switch(stepIndex) {
+      case 0:
+        return data.playerName?.trim() && data.vampireName?.trim();
+      case 1:
+        return data.memories.length >= 1 &&
+               data.memories?.[0]?.experiences?.[0]?.trim() &&
+               data.skills.length == 3 && data.skills?.slice(0, 3).every(skill => skill?.name?.trim()) &&
+               data.resources.length == 3 && data.resources?.slice(0, 3).every(resource => resource?.name?.trim());
+      case 2:
+        return data.characters.length >= 3 &&
+               data.characters?.slice(0, 3).every(char => char?.name?.trim() && char?.desc?.trim());
+      case 3:
+        return data.memories.length >= 4 &&
+               data.memories?.slice(1, 4).every(memory => memory?.experiences?.[0]?.trim());
+      case 4:
+        return data.characters.length == 4 &&
+               data.characters?.[3]?.name?.trim() && 
+               data.characters?.[3]?.desc?.trim() &&
+               data.mark?.trim() &&
+               data.memories.length == 5 &&
+               data.memories?.[4]?.experiences?.[0]?.trim();
+      default:
+        return false;
+    }
+  };
   const steps = [
     { title: "Identidad", desc: "Define quién eres y quién serás." },
     { title: "Vida Mortal", desc: "Tus habilidades y posesiones antes del cambio." },
@@ -161,9 +188,9 @@ const VampireWizard = ({
         <div className="flex justify-between">
           <Button variant="secondary" onClick={() => setStep(step - 1)} disabled={step === 0}>Atrás</Button>
           {step < steps.length - 1 ? (
-            <Button onClick={() => setStep(step + 1)}>Siguiente <MoveRight className="w-4 h-4" /></Button>
+            <Button onClick={() => setStep(step + 1)} disabled={!validateStep(step)}>Siguiente <MoveRight className="w-4 h-4" /></Button>
           ) : (
-            <Button variant="primary" onClick={onComplete}>Finalizar Ficha <Skull className="w-4 h-4" /></Button>
+            <Button variant="primary" onClick={onComplete} disabled={!validateStep(step)}>Finalizar Ficha <Skull className="w-4 h-4" /></Button>
           )}
         </div>
       </div>
