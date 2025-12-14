@@ -3,10 +3,9 @@ export const generateId = () => Math.random().toString(36).substr(2, 9);
 export const calculateDiff = (oldP, newP) => {
   const changes = [];
   if (!oldP) return ["Nació el vampiro."];
-  
+
   if (newP.memories.length > oldP.memories.length) changes.push("Creó un nuevo recuerdo.");
-  else if (newP.memories.length < oldP.memories.length) changes.push("Olvidó un recuerdo para siempre.");
-  
+
   newP.memories.forEach(m => {
     const oldM = oldP.memories.find(om => om.id === m.id);
     if (oldM) {
@@ -14,6 +13,7 @@ export const calculateDiff = (oldP, newP) => {
         changes.push(`Añadió vivencia: "${m.experiences[m.experiences.length-1].substring(0, 30)}..."`);
       }
       if (m.isDiary && !oldM.isDiary) changes.push("Movió un recuerdo al diario.");
+      if (m.isForgotten && !oldM.isForgotten) changes.push("Olvidó un recuerdo para siempre.");
     }
   });
 
