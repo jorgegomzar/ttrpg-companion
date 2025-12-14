@@ -30,20 +30,6 @@ const VampireGame = () => {
 
   const { loadGame, clearSave } = useGameStorage(gameState);
 
-  // Load saved game on mount
-  useEffect(() => {
-    const saved = loadGame();
-    if (saved) {
-      setPhase(saved.phase);
-      setPlayers(saved.players);
-      setCurrentPlayerIndex(saved.currentPlayerIndex);
-      setCreationStep(saved.creationStep);
-      setGameLog(saved.gameLog);
-      setTurnCount(saved.turnCount);
-      setTurnSnapshot(saved.turnSnapshot);
-      setTurnPhase(saved.turnPhase);
-    }
-  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
