@@ -30,6 +30,7 @@ const VampireGame = () => {
 
   const { loadGame, clearSave } = useGameStorage(gameState);
 
+  const last_save = loadGame();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -123,7 +124,7 @@ const VampireGame = () => {
 
   // --- Views ---
   if (phase === 'setup') {
-      return <SetupView onStart={startCreation} onContinue={continueGame} hasSavedGame={!!loadGame()} />
+      return <SetupView onStart={startCreation} onContinue={continueGame} lastSave={last_save} />
   }
 
   // Creation View
