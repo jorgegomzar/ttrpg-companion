@@ -20,13 +20,13 @@ const VampireEnded = ({ players, gameLog }) => {
         logDoc.text("Registro de la Crónica", 10, 10);
         logDoc.setFont("helvetica", "normal");
         logDoc.setFontSize(10);
-        
+
         let y = 20;
         let lastTurn = -1;
 
         gameLog.forEach(log => {
             if (y > 270) { logDoc.addPage(); y = 10; }
-            
+
             // Header for turn/player only if it changes or is main entry
             if (!log.isSubEntry || log.turn !== lastTurn) {
                 y += 5;
@@ -91,9 +91,9 @@ const VampireEnded = ({ players, gameLog }) => {
             if(y > 200) { doc.addPage(); y = 20; }
             doc.setFontSize(14); doc.text("Recuerdos", 10, y); y += 10;
             doc.setFontSize(10);
-            
+
             p.memories.forEach(m => {
-                const prefix = m.isDiary ? "(Diario) " : "";
+                const prefix = m.isForgotten ? "(Olvidado) " : m.isDiary ? "(Diario) " : "";
                 const content = prefix + m.experiences.join(" -> ");
                 const lines = doc.splitTextToSize(content, 180);
                 if(y + (lines.length * 5) > 280) { doc.addPage(); y = 20; }

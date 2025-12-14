@@ -192,12 +192,12 @@ const Dashboard = ({
   };
   const deleteMemory = (memoryId) => {
     if(!confirm("¿Estás seguro de olvidar esto para siempre?")) return;
-    const memories = currentPlayer.memories.filter(m => m.id !== memoryId);
+    const memories = currentPlayer.memories.map(m => m.id === memoryId ? { ...m, isForgotten: true } : m);
     updatePlayer({ ...currentPlayer, memories });
   };
 
-  const activeMemories = currentPlayer.memories.filter(m => !m.isDiary);
-  const diaryMemories = currentPlayer.memories.filter(m => m.isDiary);
+  const activeMemories = currentPlayer.memories.filter(m => !m.isDiary && !m.isForgotten);
+  const diaryMemories = currentPlayer.memories.filter(m => m.isDiary && !m.isForgotten);
 
   // --- RENDER ---
 
